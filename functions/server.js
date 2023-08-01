@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const userRoutes = require("./routes/user.js");
-const todo = require("./routes/todo.js");
+const userRoutes = require("./src/routes/user.js");
+const todo = require("./src/routes/todo.js");
 const cookieParser = require("cookie-parser");
 const serverless = require("serverless-http");
 
