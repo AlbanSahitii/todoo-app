@@ -156,6 +156,17 @@ router.post("/completed", authenticateToken, async (req, res) => {
   res.status(200).send({ message: "Done!" });
 });
 
+router.get("/completed/:_id", authenticateToken, async (req, res) => {
+  if (!req.params._id) {
+    return res.status(422).send({ message: "user id not found" });
+  }
+  const user = await Users.findOne({ _id: req.params._id });
+  if (!user) {
+    return res.status(422).send({ message: "user not found" });
+  }
+  res.send(user.completed);
+});
+
 function authenticateToken(req, res, next) {
   const token = req.header("Authorization")?.split(" ")[1];
 

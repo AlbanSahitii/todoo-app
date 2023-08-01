@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const userRoutes = require("./routes/user.js");
 const todo = require("./routes/todo.js");
 const cookieParser = require("cookie-parser");
+
 mongoose
   .connect("mongodb://localhost/todo")
   .then(() => {
@@ -15,8 +16,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use("/.netlify/functions/api/user", userRoutes);
-app.use("/.netlify/functions/api/todo", todo);
+app.use("/user", userRoutes);
+app.use("/todo", todo);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`listening on port ${port}`));
