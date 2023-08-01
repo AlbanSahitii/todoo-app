@@ -4,8 +4,9 @@ const bcrypt = require("bcrypt");
 const Users = require("../model/model.js");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
+require("dotenv").config();
 
-const SECRET_KEY = "Alban";
+const SECRET_KEY = process.env.SECRET_KEY;
 
 router.post("", async (req, res) => {
   if (!req.body._id) {

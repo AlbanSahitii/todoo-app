@@ -4,11 +4,12 @@ const bcrypt = require("bcrypt");
 const Users = require("../model/model.js");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
+require("dotenv").config();
 
 const emailRegex =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
-const SECRET_KEY = "Alban";
+const SECRET_KEY = process.env.SECRET_KEY;
 
 router.post("/register", async (req, res) => {
   const { full_name, email, password } = req.body;
@@ -27,7 +28,7 @@ router.post("/register", async (req, res) => {
       return res.send(err);
     });
 
-    res.status(200), send({ message: "Registred Succesfully" });
+    res.status(200).send({ message: "Registred Succesfully" });
   } else {
     return res
       .status(400)
