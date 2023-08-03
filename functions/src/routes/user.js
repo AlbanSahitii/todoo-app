@@ -12,7 +12,7 @@ const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
 //Using secret_key here for testing purpose
 const SECRET_KEY = "Alban";
 
-router.post("/register", async (req, res) => {
+const register = async (req, res) => {
   const { full_name, email, password, confirmPassword } = req.body;
   const result = await Users.findOne({ email: email }).catch((err) =>
     res.send(err)
@@ -39,9 +39,9 @@ router.post("/register", async (req, res) => {
       .status(400)
       .send({ message: "Email and/or password is invalid" });
   }
-});
+};
 
-router.post("/login", async (req, res) => {
+const login = async (req, res) => {
   const { email, password } = req.body;
   const user = await Users.findOne({ email: email }).catch((err) =>
     res.send(err)
@@ -67,7 +67,7 @@ router.post("/login", async (req, res) => {
 
   res.cookie("jwt", token, { httpOnly: true });
   res.status(200).send({ message: "Loggin Sucessfully", jwt: token });
-});
+};
 
 async function hashPassword(password) {
   try {
@@ -106,4 +106,4 @@ function authenticateToken(req, res, next) {
   });
 }
 
-module.exports = router;
+module.exports = { login, register };
