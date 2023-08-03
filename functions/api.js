@@ -9,7 +9,7 @@ const serverless = require("serverless-http");
 require("dotenv").config({ path: "../.env" });
 
 const uri =
-  "mongodb+srv://albansahiti2002:0kTgyfWZeKsXRMbZ@cluster0.12dn5lg.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://albansahiti2002:0kTgyfWZeKsXRMbZ@cluster0.g1tvkg6.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 console.log(`uri init`);
