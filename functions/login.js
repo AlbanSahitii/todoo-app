@@ -36,10 +36,14 @@ exports.handler = async (event, context) => {
     user_id: user._id,
     email: email,
   };
+  const token = jwt.sign(payload, SECRET_KEY);
 
   return {
     statusCode: 200,
-    body: JSON.stringify({ message: `${email} ${password}` }),
+    body: JSON.stringify({ message: "Logged in succefully", jwt: jwt }),
+    headers: {
+      "Set-Cookie": `jwt=${token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=3600`, // Set the cookie with HttpOnly and Secure flags
+    },
   };
 };
 

@@ -8,7 +8,8 @@ const serverless = require("serverless-http");
 
 require("dotenv").config({ path: "../.env" });
 
-const uri = process.env.ATLAS_URI;
+const uri =
+  "mongodb+srv://albansahiti2002:0kTgyfWZeKsXRMbZ@cluster0.12dn5lg.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
