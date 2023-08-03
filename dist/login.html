@@ -3,9 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./src/css/login.css" />
+
     <title>Login</title>
   </head>
   <body>
-    <h1>Login</h1>
+    <div class="center-div">
+      <form id="form">
+        <div class="title">
+          <h1>Login</h1>
+        </div>
+
+        <div class="email">
+          <label for="email">E-Mail</label>
+          <br />
+          <input type="email" name="email" id="email" required />
+        </div>
+
+        <div class="password">
+          <label for="password">Password</label>
+          <br />
+
+          <input type="password" name="password" id="password" required />
+        </div>
+
+        <input type="submit" class="submit-button" />
+      </form>
+    </div>
   </body>
+  <script src="./src/js/login.js"></script>
 </html>

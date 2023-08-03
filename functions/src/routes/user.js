@@ -4,21 +4,26 @@ const bcrypt = require("bcrypt");
 const Users = require("../model/model.js");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
-require("dotenv").config();
+require("dotenv").config({ path: "../../../.env" });
 
 const emailRegex =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
-const SECRET_KEY = process.env.SECRET_KEY;
+//Using secret_key here for testing purpose
+const SECRET_KEY = "Alban";
 
 router.post("/register", async (req, res) => {
-  const { full_name, email, password } = req.body;
+  const { full_name, email, password, confirmPassword } = req.body;
   const result = await Users.findOne({ email: email }).catch((err) =>
     res.send(err)
   );
 
   if (result) {
     return res.status(409).send({ message: "Already exists" });
+  }
+
+  if (password !== confirmPassword) {
+    return res.status(401).send({ message: "Password don`t match" });
   }
 
   if (emailRegex.test(email) && passwordRegex.test(password)) {
@@ -37,7 +42,7 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  const { full_name, email, password } = req.body;
+  const { email, password } = req.body;
   const user = await Users.findOne({ email: email }).catch((err) =>
     res.send(err)
   );

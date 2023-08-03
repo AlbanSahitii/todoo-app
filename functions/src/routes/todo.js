@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
-const SECRET_KEY = process.env.SECRET_KEY;
+const SECRET_KEY = "Alban";
 
 router.post("", async (req, res) => {
   if (!req.body._id) {

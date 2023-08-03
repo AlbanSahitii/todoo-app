@@ -6,7 +6,7 @@ const todo = require("./src/routes/todo.js");
 const cookieParser = require("cookie-parser");
 const serverless = require("serverless-http");
 
-require("dotenv").config();
+require("dotenv").config({ path: "../.env" });
 
 const uri = process.env.ATLAS_URI;
 
@@ -20,6 +20,13 @@ connection.once("open", () => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  next();
+});
 
 app.use("/user", userRoutes);
 app.use("/todo", todo);
