@@ -12,7 +12,7 @@ form.addEventListener("submit", (e) => {
 
 async function fetchData(loginData) {
   try {
-    const response = await fetch("http://localhost:3000/user/login", {
+    const response = await fetch("/user/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,6 +28,6 @@ async function fetchData(loginData) {
     console.log(data);
     // You can perform further actions based on the API response
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
   }
 }
