@@ -35,7 +35,8 @@ exports.handler = async (req, res) => {
 
   // res.cookie("jwt", token, { httpOnly: true });
   return {
-    message: "Loggin Sucessfully",
+    statusCode: 200,
+    body: JSON.stringify({ message: "Hello World" }),
   };
 };
 
