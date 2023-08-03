@@ -34,7 +34,9 @@ exports.handler = async (req, res) => {
   // const token = jwt.sign(payload, SECRET_KEY);
 
   // res.cookie("jwt", token, { httpOnly: true });
-  res.status(200).send({ message: "Loggin Sucessfully" });
+  return {
+    message: "Loggin Sucessfully",
+  };
 };
 
 async function verifyPassword(userPassword, storedHash) {
