@@ -9,34 +9,39 @@ require("dotenv").config({ path: "../../.env" });
 //Using secret_key here for testing purpose
 const SECRET_KEY = "Alban";
 
-exports.handler = async (req, res) => {
-  // const { email, password } = req.body;
-  // const user = await Users.findOne({ email: email }).catch((err) =>
-  //   res.send(err)
-  // );
+exports.handler = async (event, context) => {
+  const body = JSON.parse(event.body);
+  const { email, password } = body;
+  const user = await Users.findOne({ email: email }).catch((err) =>
+    res.send(err)
+  );
 
-  // if (!user) {
-  //   return res
-  //     .status(409)
-  //     .send({ message: "Email and/or password is invalid" });
-  // }
+  if (!user) {
+    return {
+      statusCode: 409,
+      body: JSON.stringify({ message: "Email and/or password is invalid" }),
+    };
+  }
 
-  // const checkPassword = await verifyPassword(password, user.password);
+  const checkPassword = await verifyPassword(password, user.password);
 
-  // if (!checkPassword) {
-  //   res.status(400).send({ message: "Email and/or password is invalid" });
-  // }
+  if (!checkPassword) {
+    return {
+      statusCode: 409,
+      body: JSON.stringify({ message: "Email and/or password is invalid" }),
+    };
+  }
 
-  // const payload = {
-  //   user_id: user._id,
-  //   email: email,
-  // };
-  // const token = jwt.sign(payload, SECRET_KEY);
+  const payload = {
+    user_id: user._id,
+    email: email,
+  };
+  const token = jwt.sign(payload, SECRET_KEY);
 
-  // res.cookie("jwt", token, { httpOnly: true });
+  res.cookie("jwt", token, { httpOnly: true });
   return {
     statusCode: 200,
-    body: JSON.stringify({ message: "Hello World" }),
+    body: JSON.stringify({ message: "Logged in succefully", jwt: jwt }),
   };
 };
 
