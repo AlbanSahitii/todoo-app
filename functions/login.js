@@ -1,11 +1,7 @@
 const express = require("express");
-const router = express.Router();
 const bcrypt = require("bcrypt");
 const Users = require("./src/model/model.js");
 const jwt = require("jsonwebtoken");
-const cookieParser = require("cookie-parser");
-require("dotenv").config({ path: "../../.env" });
-
 //Using secret_key here for testing purpose
 const SECRET_KEY = "Alban";
 
