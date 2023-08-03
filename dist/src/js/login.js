@@ -12,7 +12,7 @@ form.addEventListener("submit", (e) => {
 
 async function fetchData(loginData) {
   try {
-    const response = await fetch("/.netlify/functions/user", {
+    const response = await fetch("/.netlify/functions/user/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
