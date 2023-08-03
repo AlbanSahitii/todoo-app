@@ -38,10 +38,12 @@ exports.handler = async (event, context) => {
   };
   const token = jwt.sign(payload, SECRET_KEY);
 
-  res.cookie("jwt", token, { httpOnly: true });
   return {
     statusCode: 200,
     body: JSON.stringify({ message: "Logged in succefully", jwt: jwt }),
+    headers: {
+      "Set-Cookie": `jwt=${token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=3600`, // Set the cookie with HttpOnly and Secure flags
+    },
   };
 };
 
