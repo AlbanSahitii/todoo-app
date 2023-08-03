@@ -12,10 +12,15 @@ const SECRET_KEY = "Alban";
 exports.handler = async (event, context) => {
   const body = JSON.parse(event.body);
   const { email, password } = body;
-  const user = await Users.findOne({ email: email }).catch((err) =>
-    res.send(err)
-  );
+  console.log(`Starting to connect to db`);
+  const user = await Users.findOne({ email: email }).catch((err) => {
+    return {
+      statusCode: 409,
+      body: JSON.stringify({ message: err }),
+    };
+  });
 
+  console.log(`done got user`);
   if (!user) {
     return {
       statusCode: 409,
@@ -23,6 +28,7 @@ exports.handler = async (event, context) => {
     };
   }
 
+  console.log(`checking pww`);
   const checkPassword = await verifyPassword(password, user.password);
 
   if (!checkPassword) {
@@ -32,18 +38,20 @@ exports.handler = async (event, context) => {
     };
   }
 
+  console.log(`sending payload`);
   const payload = {
     user_id: user._id,
     email: email,
   };
-  const token = jwt.sign(payload, SECRET_KEY);
+  // const token = jwt.sign(payload, SECRET_KEY);
 
+  console.log(`returnin good`);
   return {
     statusCode: 200,
     body: JSON.stringify({ message: "Logged in succefully", jwt: jwt }),
-    headers: {
-      "Set-Cookie": `jwt=${token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=3600`, // Set the cookie with HttpOnly and Secure flags
-    },
+    // headers: {
+    //   "Set-Cookie": `jwt=${token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=3600`, // Set the cookie with HttpOnly and Secure flags
+    // },
   };
 };
 
