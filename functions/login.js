@@ -10,7 +10,9 @@ require("dotenv").config({ path: "../../.env" });
 const SECRET_KEY = "Alban";
 
 exports.handler = async (event, context) => {
+  console.log(`getting data from body`);
   const body = JSON.parse(event.body);
+  console.log(`saving data from body`);
   const { email, password } = body;
   console.log(`Starting to connect to db`);
   const user = await Users.findOne({ email: email }).catch((err) => {
