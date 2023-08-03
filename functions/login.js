@@ -10,31 +10,31 @@ require("dotenv").config({ path: "../../.env" });
 const SECRET_KEY = "Alban";
 
 exports.handler = async (req, res) => {
-  const { email, password } = req.body;
-  const user = await Users.findOne({ email: email }).catch((err) =>
-    res.send(err)
-  );
+  // const { email, password } = req.body;
+  // const user = await Users.findOne({ email: email }).catch((err) =>
+  //   res.send(err)
+  // );
 
-  if (!user) {
-    return res
-      .status(409)
-      .send({ message: "Email and/or password is invalid" });
-  }
+  // if (!user) {
+  //   return res
+  //     .status(409)
+  //     .send({ message: "Email and/or password is invalid" });
+  // }
 
-  const checkPassword = await verifyPassword(password, user.password);
+  // const checkPassword = await verifyPassword(password, user.password);
 
-  if (!checkPassword) {
-    res.status(400).send({ message: "Email and/or password is invalid" });
-  }
+  // if (!checkPassword) {
+  //   res.status(400).send({ message: "Email and/or password is invalid" });
+  // }
 
-  const payload = {
-    user_id: user._id,
-    email: email,
-  };
-  const token = jwt.sign(payload, SECRET_KEY);
+  // const payload = {
+  //   user_id: user._id,
+  //   email: email,
+  // };
+  // const token = jwt.sign(payload, SECRET_KEY);
 
-  res.cookie("jwt", token, { httpOnly: true });
-  res.status(200).send({ message: "Loggin Sucessfully", jwt: token });
+  // res.cookie("jwt", token, { httpOnly: true });
+  res.status(200).send({ message: "Loggin Sucessfully" });
 };
 
 async function verifyPassword(userPassword, storedHash) {
