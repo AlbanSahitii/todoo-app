@@ -12,12 +12,14 @@ const uri =
   "mongodb+srv://albansahiti2002:0kTgyfWZeKsXRMbZ@cluster0.12dn5lg.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+console.log(`uri init`);
 
 const connection = mongoose.connection;
 connection.once("open", () => {
   console.log(`Database connected succesfully`);
 });
 
+console.log(`database `);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
