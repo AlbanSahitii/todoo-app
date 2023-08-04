@@ -54,7 +54,7 @@ exports.handler = async (event, context) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message: "Success" }),
+        body: JSON.stringify(body),
       };
     })
     .catch((error) => ({ statusCode: 422, body: String(error) }));
