@@ -18,12 +18,12 @@ exports.handler = async (event, context) => {
     .then(async (data) => {
       console.log("Data : ", data);
 
-      console.log("user. ", user);
-      console.log("user.password ", user.password);
+      console.log("user. ", data);
+      console.log("data.password ", data.password);
       console.log("password ", password);
 
-      console.log(`done got user`);
-      if (!user) {
+      console.log(`done got data`);
+      if (!data) {
         return {
           statusCode: 409,
           body: JSON.stringify({ message: "Email and/or password is invalid" }),
@@ -31,7 +31,7 @@ exports.handler = async (event, context) => {
       }
 
       console.log(`checking pww`);
-      const checkPassword = await verifyPassword(password, user.password);
+      const checkPassword = await verifyPassword(password, data.password);
 
       if (!checkPassword) {
         return {
@@ -43,7 +43,7 @@ exports.handler = async (event, context) => {
       console.log(`sending payload`);
 
       const payload = {
-        user_id: user._id,
+        data_id: data._id,
         email: email,
       };
       // const token = jwt.sign(payload, SECRET_KEY);
