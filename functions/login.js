@@ -50,7 +50,7 @@ exports.handler = async (event, context) => {
       console.log(`returnin good`);
       return {
         statusCode: 200,
-        body: JSON.stringify({ message: "Logged in succefully", jwt: jwt }),
+        body: JSON.stringify({ message: "Logged in succefully" }),
         // headers: {
         //   "Set-Cookie": `jwt=${token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=3600`, // Set the cookie with HttpOnly and Secure flags
         // },
