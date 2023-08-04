@@ -17,6 +17,7 @@ exports.handler = async (event, context) => {
       body: JSON.stringify({ message: err }),
     };
   });
+  console.log("user. ", user);
   console.log("user.password ", user.password);
   console.log("password ", password);
 
