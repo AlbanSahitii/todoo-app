@@ -51,9 +51,10 @@ exports.handler = async (event, context) => {
       console.log(`returnin good`);
       return {
         statusCode: 200,
-        // headers: {
-        //   "Set-Cookie": `jwt=${token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=3600`, // Set the cookie with HttpOnly and Secure flags
-        // },
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: "Success" }),
       };
     })
     .catch((error) => ({ statusCode: 422, body: String(error) }));
