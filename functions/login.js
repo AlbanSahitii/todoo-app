@@ -11,7 +11,7 @@ exports.handler = async (event, context) => {
   console.log(`saving data from body`);
   const { email, password } = body;
   console.log(`Starting to connect to db`);
-  const user = await Users.findOne({ email: email }).catch((err) => {
+  const user = await Users.find({ email: email }).catch((err) => {
     return {
       statusCode: 409,
       body: JSON.stringify({ message: err }),

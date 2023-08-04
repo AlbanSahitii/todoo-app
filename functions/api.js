@@ -12,14 +12,11 @@ const uri =
   "mongodb+srv://albansahiti2002:0kTgyfWZeKsXRMbZ@cluster0.g1tvkg6.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-console.log(`uri init`);
 
 const connection = mongoose.connection;
 connection.once("open", () => {
   console.log(`Database connected succesfully`);
 });
-
-console.log(`database `);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -31,5 +28,11 @@ app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Credentials", true);
   next();
 });
+
+app.use("/user", userRoutes);
+app.use("/todo", todo);
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`listening on port ${port}`));
 
 module.exports.handler = serverless(app);
