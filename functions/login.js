@@ -14,7 +14,7 @@ exports.handler = async (event, context) => {
 
   console.log(`Starting to connect to db`);
 
-  user = await Users.find({ email: email })
+  user = Users.find({ email: email })
     .then((data) => console.log(data))
     .catch((error) => console.log(`getting user error ${error}`));
 
