@@ -61,7 +61,6 @@ exports.handler = async (event, context) => {
           "Access-Control-Allow-Credentials": "true",
           //   "Set-Cookie": `jwt=${token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=3600`, // Set the cookie with HttpOnly and Secure flags
         },
-        body: String("succefully"),
       };
     })
     .catch((error) => ({ statusCode: 422, body: String(error) }));
