@@ -13,7 +13,7 @@ const todoItemSchema = new mongoose.Schema({
 todoItemSchema.set("timestamps", true);
 
 const userSchema = new mongoose.Schema({
-  full_name: { type: String, required: true },
+  full_name: { type: String },
   email: {
     type: String,
     required: true,
