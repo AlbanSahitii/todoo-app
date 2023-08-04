@@ -32,7 +32,7 @@ app.use(function (req, res, next) {
 app.use("/user", userRoutes);
 app.use("/todo", todo);
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`listening on port ${port}`));
+// const port = process.env.PORT || 3000;
+// app.listen(port, () => console.log(`listening on port ${port}`));
 
 module.exports.handler = serverless(app);
