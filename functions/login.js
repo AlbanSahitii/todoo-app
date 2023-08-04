@@ -10,13 +10,15 @@ exports.handler = async (event, context) => {
   const body = JSON.parse(event.body);
   console.log(`saving data from body`);
   const { email, password } = body;
+
   console.log(`Starting to connect to db`);
-  const user = await Users.find({ email: email }).catch((err) => {
-    return {
-      statusCode: 409,
-      body: JSON.stringify({ message: err }),
-    };
-  });
+
+  try {
+    const user = await Users.find({ email: email });
+  } catch (error) {
+    console.log(`getting user error ${error}`);
+  }
+
   console.log("user. ", user);
   console.log("user.password ", user.password);
   console.log("password ", password);
