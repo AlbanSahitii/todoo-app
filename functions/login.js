@@ -64,20 +64,5 @@ exports.handler = async (event, context) => {
         body: JSON.stringify("succefully"),
       };
     })
-    .catch((error) => {
-      return {
-        statusCode: 404,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Headers":
-            "Origin, X-Requested-With, Content-Type, Accept",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Methods": "*",
-          "Access-Control-Max-Age": "2592000",
-          "Access-Control-Allow-Credentials": "true",
-          //   "Set-Cookie": `jwt=${token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=3600`, // Set the cookie with HttpOnly and Secure flags
-        },
-        body: JSON.stringify("erroor", error),
-      };
-    });
+    .catch((error) => ({ statusCode: 422, body: String(error) }));
 };
