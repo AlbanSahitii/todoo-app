@@ -13,13 +13,10 @@ exports.handler = async (event, context) => {
   const { email, password } = body;
 
   console.log(`Starting to connect to db`);
-  const user = null;
 
-  try {
-    user = await Users.find({ email: email }).then((data) => console.log(data));
-  } catch (error) {
-    console.log(`getting user error ${error}`);
-  }
+  user = await Users.find({ email: email })
+    .then((data) => console.log(data))
+    .catch((error) => console.log(`getting user error ${error}`));
 
   console.log("user. ", user);
   console.log("user.password ", user.password);
