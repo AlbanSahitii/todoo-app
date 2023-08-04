@@ -31,9 +31,9 @@ exports.handler = async (event, context) => {
       }
 
       console.log(`checking pww`);
-      const checkPassword = await verifyPassword(password, data.password);
+      const isPasswordMatch = await bcrypt.compare(password, data.password);
 
-      if (!checkPassword) {
+      if (!isPasswordMatch) {
         return {
           statusCode: 409,
           body: JSON.stringify({ message: "Email and/or password is invalid" }),
@@ -59,13 +59,3 @@ exports.handler = async (event, context) => {
     })
     .catch((error) => console.log(`getting user error ${error}`));
 };
-
-async function verifyPassword(userPassword, storedHash) {
-  try {
-    const isPasswordMatch = await bcrypt.compare(userPassword, storedHash);
-    return isPasswordMatch;
-  } catch (err) {
-    console.error("Error while verifying password:", err);
-    throw err;
-  }
-}
