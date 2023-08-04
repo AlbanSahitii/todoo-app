@@ -52,9 +52,10 @@ exports.handler = async (event, context) => {
       return {
         statusCode: 200,
         body: JSON.stringify({ message: "Logged in succefully" }),
-        // headers: {
-        //   "Set-Cookie": `jwt=${token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=3600`, // Set the cookie with HttpOnly and Secure flags
-        // },
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          //   "Set-Cookie": `jwt=${token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=3600`, // Set the cookie with HttpOnly and Secure flags
+        },
       };
     })
     .catch((error) => console.log(`getting user error ${error}`));
