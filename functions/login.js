@@ -51,7 +51,6 @@ exports.handler = async (event, context) => {
       console.log(`returnin good`);
       return {
         statusCode: 200,
-        body: JSON.stringify({ message: "Logged in succefully" }),
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Headers":
@@ -62,6 +61,7 @@ exports.handler = async (event, context) => {
           "Access-Control-Allow-Credentials": "true",
           //   "Set-Cookie": `jwt=${token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=3600`, // Set the cookie with HttpOnly and Secure flags
         },
+        body: JSON.stringify({ message: "Logged in succefully" }),
       };
     })
     .catch((error) => console.log(`getting user error ${error}`));
