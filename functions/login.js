@@ -41,6 +41,7 @@ exports.handler = async (event, context) => {
       }
 
       console.log(`sending payload`);
+
       const payload = {
         user_id: user._id,
         email: email,
