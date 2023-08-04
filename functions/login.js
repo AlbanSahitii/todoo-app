@@ -1,7 +1,8 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
-const Users = require("./src/model/model.js");
+const Users = require("./src/model/model");
 const jwt = require("jsonwebtoken");
+require("./api");
 //Using secret_key here for testing purpose
 const SECRET_KEY = "Alban";
 
