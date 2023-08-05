@@ -1,5 +1,4 @@
 [build]
   directory = "functions/"
   node_bundler = "esbuild"
-
-
+  Command = "npm run build:lambda"
