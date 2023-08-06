@@ -6,8 +6,7 @@
   "homepage": "https://cheery-panda-a4bc8b.netlify.app/login",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node functions/server.js",
-    "start:lambda": "netlify-lambda serve functions"
+    "start": "node functions/server.js"
   },
   "keywords": [],
   "author": "",
