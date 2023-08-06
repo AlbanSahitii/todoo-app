@@ -1,14 +1,10 @@
 const express = require("express");
-const router = express.Router();
 const bcrypt = require("bcrypt");
-const Users = require("../model/model.js");
-const jwt = require("jsonwebtoken");
-const cookieParser = require("cookie-parser");
+const Users = require("./model/model.js");
 
 const emailRegex =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
-const SECRET_KEY = "Alban";
 
 async function hashPassword(password) {
   try {
@@ -21,10 +17,15 @@ async function hashPassword(password) {
 }
 
 exports.handler = async (event, context) => {
-  const { full_name, email, password, confirmPassword } = event;
-  const result = await Users.findOne({ email: email }).catch((err) =>
-    res.send(err)
-  );
+  const body = JSON.parse(event.body);
+  const { full_name, email, password, confirmPassword } = body;
+  const result = await Users.findOne({ email: email }).catch((err) => {
+    return {
+      statusCode: 401,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(err),
+    };
+  });
 
   if (result) {
     return {
@@ -43,8 +44,8 @@ exports.handler = async (event, context) => {
   }
 
   if (emailRegex.test(email) && passwordRegex.test(password)) {
-    event.password = await hashPassword(password);
-    const userCreate = await Users.create(event).catch((err) => {
+    body.password = await hashPassword(password);
+    const userCreate = await Users.create(body).catch((err) => {
       return {
         statusCode: 401,
         headers: { "Content-Type": "application/json" },
