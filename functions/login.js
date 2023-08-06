@@ -24,6 +24,7 @@ exports.handler = async (event, context) => {
 
       console.log(`done got data`);
       if (!data) {
+        console.log(`data invalid`);
         return {
           statusCode: 409,
           body: JSON.stringify({ message: "Email and/or password is invalid" }),
