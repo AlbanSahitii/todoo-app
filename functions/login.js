@@ -13,10 +13,6 @@ exports.handler = async (event, context) => {
   const { email, password } = body;
 
   console.log(`Starting to connect to db`);
-  return {
-    statusCode: 200,
-    body: JSON.stringify("hello"),
-  };
 
   const user = await Users.findOne({ email: email })
     .then(async (data) => {
@@ -52,15 +48,15 @@ exports.handler = async (event, context) => {
         email: email,
       };
       // const token = jwt.sign(payload, SECRET_KEY);
-
-      console.log(`returnin good`);
-      return {
-        statusCode: 200,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      };
+      return body;
     })
     .catch((error) => ({ statusCode: 422, body: String(error) }));
+  console.log(`returnin good`);
+  return {
+    statusCode: 200,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  };
 };
