@@ -1,6 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
-const Users = require("./model/model.js");
+const Users = require("./src/model/model.js");
+require("./api");
 
 const emailRegex =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
