@@ -13,6 +13,10 @@ exports.handler = async (event, context) => {
   const { email, password } = body;
 
   console.log(`Starting to connect to db`);
+  return {
+    statusCode: 200,
+    body: JSON.stringify("hello"),
+  };
 
   const user = await Users.findOne({ email: email })
     .then(async (data) => {
