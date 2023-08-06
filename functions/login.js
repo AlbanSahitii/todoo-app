@@ -47,8 +47,8 @@ exports.handler = async (event, context) => {
         data_id: data._id,
         email: email,
       };
-      // const token = jwt.sign(payload, SECRET_KEY);
-      return body;
+      const token = jwt.sign(payload, SECRET_KEY);
+      return token;
     })
     .catch((error) => ({ statusCode: 422, body: String(error) }));
   console.log(`returnin good`);
@@ -56,6 +56,13 @@ exports.handler = async (event, context) => {
     statusCode: 200,
     headers: {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers":
+        "Origin, X-Requested-With, Content-Type, Accept",
+      "Access-Control-Allow-Methods": "*",
+      "Access-Control-Max-Age": "2592000",
+      "Access-Control-Allow-Credentials": "true",
+      "Set-Cookie": `jwt=${user}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=3600`,
     },
     body: JSON.stringify(user),
   };
