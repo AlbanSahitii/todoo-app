@@ -24,9 +24,7 @@ async function fetchData(loginData) {
     },
     body: JSON.stringify(loginData),
   })
-    .then((response) => {
-      response.json();
-    })
+    .then((response) => response.json())
     .then((data) => {
       console.log(data.message);
     })
