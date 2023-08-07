@@ -20,7 +20,8 @@ async function fetchData(loginData) {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data.user);
+      console.log(data);
+      console.log(typeof data);
     })
     .catch((err) => {
       if (err) {
