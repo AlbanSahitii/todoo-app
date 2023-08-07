@@ -1,6 +1,11 @@
 const registerForm = document.getElementById("register-form");
 const succesParagraph = document.getElementById("success");
 
+const jwt = localStorage.getItem("jwt");
+if (jwt) {
+  window.location.href = "/index.html";
+}
+
 registerForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const full_name = document.getElementById("full-name").value;
