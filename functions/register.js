@@ -18,10 +18,6 @@ async function hashPassword(password) {
 }
 
 exports.handler = async (event, context) => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify("hello"),
-  };
   const body = JSON.parse(event.body);
 
   const { full_name, email, password, confirmPassword } = body;
