@@ -66,7 +66,6 @@ exports.handler = async (event, context) => {
     });
     console.log("u marr useri");
 
-    res.status(200).send({ message: "Registred Succesfully" });
     return {
       statusCode: 200,
       headers: { "Content-Type": "application/json" },
