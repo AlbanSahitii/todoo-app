@@ -11,23 +11,19 @@ loginForm.addEventListener("submit", (e) => {
 });
 
 async function fetchData(loginData) {
-  try {
-    const response = await fetch("/.netlify/functions/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(loginData),
+  await fetch("/.netlify/functions/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(loginData),
+  })
+    .then((response) => {
+      console.log(`data`);
+    })
+    .catch((err) => {
+      if (err) {
+        throw new Error("Request failed:", err);
+      }
     });
-
-    if (!response.ok) {
-      throw new Error("Request failed:", response.status);
-    }
-
-    const data = await response.json();
-    console.log(data);
-    // You can perform further actions based on the API response
-  } catch (error) {
-    console.error(error.message);
-  }
 }
