@@ -18,15 +18,24 @@ async function hashPassword(password) {
 }
 
 exports.handler = async (event, context) => {
+  return {
+    statusCode: 200,
+    body: JSON.stringify("hello"),
+  };
   const body = JSON.parse(event.body);
+
   const { full_name, email, password, confirmPassword } = body;
+  console.log(`finding user`);
   const result = await Users.findOne({ email: email }).catch((err) => {
+    console.log(`didnt find user`);
     return {
       statusCode: 401,
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(err),
     };
   });
+
+  console.log("checking if there was a user");
 
   if (result) {
     return {
@@ -36,6 +45,7 @@ exports.handler = async (event, context) => {
     };
   }
 
+  console.log("password me confirmpassword !==");
   if (password !== confirmPassword) {
     return {
       statusCode: 401,
@@ -44,8 +54,13 @@ exports.handler = async (event, context) => {
     };
   }
 
+  console.log("email regex test");
   if (emailRegex.test(email) && passwordRegex.test(password)) {
+    console.log("berja hash");
     body.password = await hashPassword(password);
+    console.log("ube hash");
+
+    console.log("merrja userit");
     const userCreate = await Users.create(body).catch((err) => {
       return {
         statusCode: 401,
@@ -53,6 +68,7 @@ exports.handler = async (event, context) => {
         body: JSON.stringify(err),
       };
     });
+    console.log("u marr useri");
 
     res.status(200).send({ message: "Registred Succesfully" });
     return {
