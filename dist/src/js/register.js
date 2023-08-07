@@ -1,18 +1,20 @@
-const loginForm = document.getElementById("login-form");
+const registerForm = document.getElementById("register-form");
 
-loginForm.addEventListener("submit", (e) => {
+registerForm.addEventListener("submit", (e) => {
   e.preventDefault();
+  const full_name = document.getElementById("full-name").value;
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirm-password").value;
 
-  const loginData = { email, password };
+  const loginData = { full_name, email, password, confirmPassword };
 
   fetchData(loginData);
 });
 
 async function fetchData(loginData) {
   try {
-    const response = await fetch("/.netlify/functions/login", {
+    const response = await fetch("/.netlify/functions/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

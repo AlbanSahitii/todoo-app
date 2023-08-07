@@ -5,8 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./src/css/login.css" />
 
-    <title>register</title>
+    <title>Register</title>
   </head>
-  <body></body>
+  <body>
+    <div class="center-div">
+      <form id="register-form">
+        <div class="title">
+          <h1>Register</h1>
+        </div>
+
+        <div class="full-name">
+          <label for="full-name">Full Name</label>
+          <br />
+          <input type="full-name" name="full-name" id="full-name" required />
+        </div>
+
+        <div class="email">
+          <label for="email">E-Mail</label>
+          <br />
+          <input type="email" name="email" id="email" required />
+        </div>
+
+        <div class="password">
+          <label for="password">Password</label>
+          <br />
+
+          <input type="password" name="password" id="password" required />
+        </div>
+
+        <div class="confirm-password">
+          <label for="confirm-password">Confirm Password</label>
+          <br />
+
+          <input
+            type="confirm-password"
+            name="confirm-password"
+            id="confirm-password"
+            required
+          />
+        </div>
+
+        <input type="submit" class="submit-button" />
+      </form>
+    </div>
+  </body>
   <script src="./src/js/login.js"></script>
 </html>

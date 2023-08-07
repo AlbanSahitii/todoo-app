@@ -62,7 +62,6 @@ exports.handler = async (event, context) => {
       "Access-Control-Allow-Methods": "*",
       "Access-Control-Max-Age": "2592000",
       "Access-Control-Allow-Credentials": "true",
-      "Set-Cookie": `jwt=${user}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=3600`,
     },
     body: JSON.stringify(user),
   };
