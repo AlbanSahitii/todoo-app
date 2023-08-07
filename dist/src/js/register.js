@@ -7,6 +7,10 @@ registerForm.addEventListener("submit", (e) => {
   const password = document.getElementById("password").value;
   const confirmPassword = document.getElementById("confirm-password").value;
 
+  if (password !== confirmPassword) {
+    return alert("password dont match");
+  }
+
   const loginData = { full_name, email, password, confirmPassword };
 
   fetchData(loginData);
