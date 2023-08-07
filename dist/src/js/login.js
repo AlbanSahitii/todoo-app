@@ -20,11 +20,12 @@ async function fetchData(loginData) {
   })
     .then((response) => response.json())
     .then((data) => {
-      localStorage.setItem(jwt, data);
-      console.log(localStorage.getItem(jwt));
+      window.localStorage.setItem(jwt, data);
+      console.log(window.localStorage.getItem(jwt));
     })
     .catch((err) => {
       if (err) {
+        console.log(err);
         throw new Error("Request failed:", err);
       }
     });
