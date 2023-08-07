@@ -1,4 +1,8 @@
 const loginForm = document.getElementById("login-form");
+const jwt = localStorage.getItem("jwt");
+if (jwt) {
+  window.location.href = "/index.html";
+}
 
 loginForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -20,8 +24,12 @@ async function fetchData(loginData) {
   })
     .then((response) => response.json())
     .then((data) => {
-      localStorage.setItem("jwt", data);
-      console.log(localStorage.getItem("jwt"));
+      if (data) {
+        localStorage.setItem("jwt", data);
+        window.location.href = "/index.html";
+      } else {
+        console.log(`something went wrong`);
+      }
     })
     .catch((err) => {
       if (err) {
