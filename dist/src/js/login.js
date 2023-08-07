@@ -20,8 +20,8 @@ async function fetchData(loginData) {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
-      console.log(typeof data);
+      localStorage.setItem("jwt", data);
+      console.log(localStorage.getItem("jwt"));
     })
     .catch((err) => {
       if (err) {
