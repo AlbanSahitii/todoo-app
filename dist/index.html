@@ -4,8 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./src/css/main-page.css" />
-    <script src="./src/js/main-page.js"></script>
-
+    <script>
+      const jwt = localStorage.getItem("jwt");
+      if (!jwt) {
+        window.location.href = "/login.html";
+      }
+    </script>
     <title>index</title>
   </head>
   <body>

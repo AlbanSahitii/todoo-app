@@ -1,8 +1,4 @@
 const loginForm = document.getElementById("login-form");
-const jwt = localStorage.getItem("jwt");
-if (jwt) {
-  window.location.href = "/index.html";
-}
 
 loginForm.addEventListener("submit", (e) => {
   e.preventDefault();
