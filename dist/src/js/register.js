@@ -25,7 +25,7 @@ async function fetchData(loginData) {
     body: JSON.stringify(loginData),
   })
     .then((response) => {
-      console.log(response.message);
+      console.log(response.body.message);
     })
     .catch((err) => {
       if (err) {
