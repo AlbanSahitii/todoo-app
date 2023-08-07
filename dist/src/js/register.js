@@ -1,4 +1,5 @@
 const registerForm = document.getElementById("register-form");
+const succesParagraph = document.getElementById("success");
 
 registerForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -27,6 +28,7 @@ async function fetchData(loginData) {
     .then((response) => response.json())
     .then((data) => {
       console.log(data.message);
+      succesParagraph.value = data.message;
     })
     .catch((err) => {
       if (err) {

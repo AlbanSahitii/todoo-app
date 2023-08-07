@@ -11,7 +11,7 @@ body {
 
 .center-div {
   width: 40%;
-  height: 400px;
+  height: 60%;
   border: 1px solid #ccc;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -55,4 +55,8 @@ h1 {
 
 input:focus {
   outline: none;
+}
+
+.success {
+  color: green;
 }

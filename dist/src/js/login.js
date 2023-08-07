@@ -18,8 +18,9 @@ async function fetchData(loginData) {
     },
     body: JSON.stringify(loginData),
   })
-    .then((response) => {
-      console.log(`data`);
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data.user);
     })
     .catch((err) => {
       if (err) {
