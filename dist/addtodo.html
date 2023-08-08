@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./src/css/login.css" />
+    <link rel="stylesheet" href="./src/css/main-page.css" />
+
+    <!-- <script>
+      const jwt = localStorage.getItem("jwt");
+      if (!jwt) {
+        window.location.href = "/login.html";
+      }
+    </script> -->
+    <title>Add Todo</title>
+  </head>
+  <body>
+    <div class="center-div">
+      <form id="register-form" method="post">
+        <div class="title">
+          <h1>Add Todo</h1>
+        </div>
+
+        <div class="full-name">
+          <label for="name">Name</label>
+          <br />
+          <input type="text" name="name" id="name" required />
+        </div>
+
+        <div class="email">
+          <label for="description">Description</label>
+          <br />
+          <input type="email" name="description" id="description" required />
+        </div>
+
+        <input type="submit" class="submit-button" value="Add Todo" />
+      </form>
+      <div class="redirect">
+        <button><a href="index.html">Go To Todo</a></button>
+      </div>
+    </div>
+  </body>
+  <script src="./src/js/addTodo.js"></script>
+</html>
