@@ -13,7 +13,7 @@ const header = {
   "Access-Control-Max-Age": "2592000",
   "Access-Control-Allow-Credentials": "true",
 };
-const jwtAuth = (headers, secretKey) => {
+const authenticateToken = (headers, secretKey) => {
   const authorizationHeader = headers.authorization;
 
   if (authorizationHeader) {
@@ -35,7 +35,7 @@ const jwtAuth = (headers, secretKey) => {
 exports.handler = async (event, context) => {
   const SECRET_KEY = "Alban";
   console.log(`jwtauth function call`);
-  const jwtAuth = jwtAuth(event.headers, SECRET_KEY);
+  const jwtAuth = authenticateToken(event.headers, SECRET_KEY);
 
   console.log(`jwtauth validation`);
   if (!jwtAuth) {
