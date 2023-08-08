@@ -15,10 +15,10 @@ const header = {
 };
 const authenticateToken = (headers, secretKey) => {
   const authorizationHeader = headers.authorization;
+  console.log(headers, "  auth function");
 
   if (authorizationHeader) {
     const token = authorizationHeader.split(" ")[1];
-    console.log(token, "  auth function");
     try {
       // Verify the JWT token using the provided secret key
       const decoded = jwt.verify(token, secretKey);
