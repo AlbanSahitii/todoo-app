@@ -15,7 +15,6 @@ const header = {
 };
 const authenticateToken = (headers, secretKey) => {
   const authorizationHeader = headers.authorization;
-  console.log(headers, "  auth function");
 
   if (authorizationHeader) {
     const token = authorizationHeader.split(" ")[1];

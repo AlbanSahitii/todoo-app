@@ -7,7 +7,7 @@ async function fetchData() {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(_id),
+    body: JSON.stringify({ _id }),
   })
     .then((response) => response.json())
     .then((data) => {
