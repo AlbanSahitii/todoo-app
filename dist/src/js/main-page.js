@@ -1,4 +1,4 @@
-const token = localStorage.getItem("token");
+const token = localStorage.getItem("jwt");
 const _id = localStorage.getItem("id");
 async function fetchData() {
   await fetch("/.netlify/functions/getTodos", {
