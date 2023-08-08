@@ -13,6 +13,24 @@ const header = {
   "Access-Control-Max-Age": "2592000",
   "Access-Control-Allow-Credentials": "true",
 };
+const jwtAuth = (headers, secretKey) => {
+  const authorizationHeader = headers.authorization;
+
+  if (authorizationHeader) {
+    const token = authorizationHeader.split(" ")[1];
+
+    try {
+      // Verify the JWT token using the provided secret key
+      const decoded = jwt.verify(token, secretKey);
+      return decoded; // Return the decoded token payload
+    } catch (error) {
+      console.error("JWT verification error:", error.message);
+      return null; // Token verification failed
+    }
+  }
+
+  return null;
+};
 
 exports.handler = async (event, context) => {
   const SECRET_KEY = "Alban";
@@ -34,42 +52,23 @@ exports.handler = async (event, context) => {
   console.log(`saving data from body`);
   const { _id } = body;
   if (!_id) {
-      return {
-          statusCode: 422,
-          body: JSON.stringify({ message: "user id not found" }),
-        };
-    }
-    console.log(`id request found`)
-    const user = await Users.findOne({ _id: _id });
-    console.log(`user found`)
-    if (!user) {
-        return {
-            statusCode: 422,
-            body: JSON.stringify({ message: "user not found" }),
-        };
-    }
     return {
-        statusCode: 200,
-        headers: header,
-        body: JSON.stringify(user.todo),
+      statusCode: 422,
+      body: JSON.stringify({ message: "user id not found" }),
     };
-};
-
-const jwtAuth = (headers, secretKey) => {
-  const authorizationHeader = headers.authorization;
-
-  if (authorizationHeader) {
-    const token = authorizationHeader.split(" ")[1];
-
-    try {
-      // Verify the JWT token using the provided secret key
-      const decoded = jwt.verify(token, secretKey);
-      return decoded; // Return the decoded token payload
-    } catch (error) {
-      console.error("JWT verification error:", error.message);
-      return null; // Token verification failed
-    }
   }
-
-  return null;
+  console.log(`id request found`);
+  const user = await Users.findOne({ _id: _id });
+  console.log(`user found`);
+  if (!user) {
+    return {
+      statusCode: 422,
+      body: JSON.stringify({ message: "user not found" }),
+    };
+  }
+  return {
+    statusCode: 200,
+    headers: header,
+    body: JSON.stringify(user.todo),
+  };
 };
