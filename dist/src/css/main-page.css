@@ -1,1 +1,63 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+.main-page {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.todo {
+  background-color: red;
+  width: 50%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+.completed {
+  background-color: blue;
+  width: 50%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  margin: 10px;
+  background-color: yellow;
+  height: 200px;
+  width: 80%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.content {
+  height: 100%;
+  width: 80%;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  align-items: stretch;
+  align-content: stretch;
+}
+.card-buttons {
+  height: 100%;
+  width: 20%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.content-description,
+.content-tittle {
+  color: white;
+  margin: 30px;
+}
+
+.card-buttons > button {
+  margin: 10px;
+}

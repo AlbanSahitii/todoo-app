@@ -21,7 +21,9 @@ async function fetchData(loginData) {
     .then((response) => response.json())
     .then((data) => {
       if (data) {
-        localStorage.setItem("jwt", data);
+        localStorage.setItem("jwt", data.token);
+        localStorage.setItem("id", data._id);
+        console.log(localStorage.getItem("id"));
         window.location.href = "/index.html";
       } else {
         console.log(`something went wrong`);

@@ -48,7 +48,7 @@ exports.handler = async (event, context) => {
         email: email,
       };
       const token = jwt.sign(payload, SECRET_KEY);
-      return token;
+      return { token: token, _id: data._id };
     })
     .catch((error) => ({ statusCode: 422, body: String(error) }));
   console.log(`returnin good`);

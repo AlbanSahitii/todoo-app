@@ -4,15 +4,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./src/css/main-page.css" />
-    <script>
+    <!-- <script>
       const jwt = localStorage.getItem("jwt");
       if (!jwt) {
         window.location.href = "/login.html";
       }
-    </script>
+    </script> -->
     <title>index</title>
   </head>
   <body>
-    <h1>Hello index.html</h1>
+    <div class="main-page">
+      <div class="todo">
+        <div class="card">
+          <div class="content">
+            <p class="content-tittle">Title</p>
+            <p class="content-description">Description</p>
+          </div>
+          <div class="card-buttons">
+            <button>Edit</button>
+            <button>Done</button>
+          </div>
+        </div>
+      </div>
+      <div class="completed">
+        <div class="card"></div>
+      </div>
+    </div>
   </body>
+  <script src="./src/js/main-page.js"></script>
 </html>
