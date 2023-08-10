@@ -59,14 +59,13 @@ exports.handler = async (event, context) => {
   user.todo.push(newToDo);
 
   console.log(`saving user ${user}`);
-  user
-    .save()
-    .then((savedUser) => {
-      return console.log("New todoItem added to user:", savedUser);
-    })
-    .catch((error) => {
-      return console.error("Error while saving user:", error);
-    });
+
+  try {
+    const savedUser = await user.save();
+    console.log("New todoItem added to user:", savedUser);
+  } catch (error) {
+    console.error("Error while saving user:", error);
+  }
 
   console.log(`saved`);
   return {
