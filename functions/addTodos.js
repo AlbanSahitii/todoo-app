@@ -44,7 +44,7 @@ exports.handler = async (event, context) => {
     name: name,
     description: description,
   };
-  console.log(`saving todo to newtodo ${newtodo}`);
+  console.log(`saving todo to newtodo ${newToDo}`);
 
   const user = await Users.findOne({ _id: _id }).catch((err) => res.send(err));
   if (!user) {
