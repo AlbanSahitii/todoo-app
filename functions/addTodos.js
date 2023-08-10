@@ -57,10 +57,10 @@ exports.handler = async (event, context) => {
   user
     .save()
     .then((savedUser) => {
-      console.log("New todoItem added to user:", savedUser);
+      return console.log("New todoItem added to user:", savedUser);
     })
     .catch((error) => {
-      console.error("Error while saving user:", error);
+      return console.error("Error while saving user:", error);
     });
 
   return {
