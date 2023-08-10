@@ -1,6 +1,7 @@
 const token = localStorage.getItem("jwt");
 const _id = localStorage.getItem("id");
-let todos;
+const todoDiv = document.getElementById("todo");
+
 async function fetchData() {
   await fetch("/.netlify/functions/getTodos", {
     method: "POST",
@@ -12,7 +13,23 @@ async function fetchData() {
   })
     .then((response) => response.json())
     .then((data) => {
-      todos = data;
+      console.log(data);
+
+      data.map((element) => {
+        const todoHTML = `
+        <div class="card" data-id="${element._id}">
+        <div class="content">
+        <p class="content-tittle">${element.name}</p>
+        <p class="content-description">${element.description}</p>
+        </div>
+        <div class="card-buttons">
+        <button>Edit</button>
+        <button>Done</button>
+        </div>
+        </div>`;
+
+        todoDiv.insertAdjacentHTML("afterend", todoHTML);
+      });
     })
     .catch((err) => {
       if (err) {
@@ -21,5 +38,3 @@ async function fetchData() {
     });
 }
 fetchData();
-
-console.log(todos);
