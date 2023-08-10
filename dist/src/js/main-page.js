@@ -20,5 +20,6 @@ async function fetchData() {
       }
     });
 }
+fetchData();
 
 console.log(todos);
