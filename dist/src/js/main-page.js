@@ -40,3 +40,19 @@ async function fetchData() {
     });
 }
 fetchData();
+
+const parentElement = document.querySelector(".main-page");
+
+parentElement.addEventListener("click", (event) => {
+  if (event.target.tagName === "BUTTON" && event.target.closest(".card")) {
+    const cardElement = event.target.closest(".card");
+
+    const dataId = cardElement.getAttribute("data-id");
+
+    if (event.target.textContent === "Edit") {
+      console.log(`Edit button clicked for card with data-id: ${dataId}`);
+    } else if (event.target.textContent === "Done") {
+      console.log(`Done button clicked for card with data-id: ${dataId}`);
+    }
+  }
+});
