@@ -20,6 +20,6 @@ async function fetchData() {
     });
 }
 
-const todos = await fetchData();
+const todos = fetchData();
 
 console.log(todos);
