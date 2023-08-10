@@ -1,7 +1,7 @@
 const token = localStorage.getItem("jwt");
 const todoForm = document.getElementById("add-todo");
-
-todoForm.addEventListener("submit", (e) => {
+let todos;
+todoForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const name = document.getElementById("name").value;
@@ -10,9 +10,13 @@ todoForm.addEventListener("submit", (e) => {
 
   const body = { _id, name, description };
 
-  fetchData(body);
+  try {
+    todos = await fetchData(body);
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
+  }
+  console.log(todos);
 });
-
 async function fetchData(body) {
   const response = await fetch("/.netlify/functions/addTodos", {
     method: "POST",
@@ -24,7 +28,7 @@ async function fetchData(body) {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
+      return data;
     })
     .catch((err) => {
       if (err) {

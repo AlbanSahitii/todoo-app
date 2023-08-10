@@ -11,7 +11,7 @@ async function fetchData() {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
+      return data;
     })
     .catch((err) => {
       if (err) {
@@ -20,4 +20,6 @@ async function fetchData() {
     });
 }
 
-fetchData();
+const todos = await fetchData();
+
+console.log(todos);
