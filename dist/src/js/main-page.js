@@ -13,7 +13,7 @@ async function fetchData() {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
+      console.log(data[0]);
 
       data[0].map((element) => {
         const todoHTML = `
