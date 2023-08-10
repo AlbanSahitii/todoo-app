@@ -30,7 +30,7 @@ async function fetchData() {
         </div>
         </div>`;
 
-        todoDiv.insertAdjacentHTML("afterend", todoHTML);
+        todoDiv.insertAdjacentHTML("afterbegin", todoHTML);
       });
     })
     .catch((err) => {
