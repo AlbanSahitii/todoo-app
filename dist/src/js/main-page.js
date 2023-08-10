@@ -1,5 +1,6 @@
 const token = localStorage.getItem("jwt");
 const _id = localStorage.getItem("id");
+let todos;
 async function fetchData() {
   await fetch("/.netlify/functions/getTodos", {
     method: "POST",
@@ -11,7 +12,7 @@ async function fetchData() {
   })
     .then((response) => response.json())
     .then((data) => {
-      return data;
+      todos = data;
     })
     .catch((err) => {
       if (err) {
@@ -19,7 +20,5 @@ async function fetchData() {
       }
     });
 }
-
-const todos = fetchData();
 
 console.log(todos);
