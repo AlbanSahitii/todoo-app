@@ -20,6 +20,7 @@ exports.handler = async (event, context) => {
   console.log(`saving data from body`);
   const { _id, name, description } = body;
 
+  console.log(`validating`, body);
   if (!_id) {
     return {
       statusCode: 422,
@@ -43,6 +44,7 @@ exports.handler = async (event, context) => {
     name: name,
     description: description,
   };
+  console.log(`saving todo to newtodo ${newtodo}`);
 
   const user = await Users.findOne({ _id: _id }).catch((err) => res.send(err));
   if (!user) {
@@ -52,8 +54,11 @@ exports.handler = async (event, context) => {
     };
   }
 
+  console.log(`finding user ${user}`);
+
   user.todo.push(newToDo);
 
+  console.log(`saving user ${user}`);
   user
     .save()
     .then((savedUser) => {
@@ -63,6 +68,7 @@ exports.handler = async (event, context) => {
       return console.error("Error while saving user:", error);
     });
 
+  console.log(`saved`);
   return {
     statusCode: 200,
     headers: header,
