@@ -15,21 +15,21 @@ async function fetchData() {
     .then((data) => {
       console.log(data);
 
-      data.map((element) => {
-        const todoHTML = `
-        <div class="card" data-id="${element._id}">
-        <div class="content">
-        <p class="content-tittle">${element.name}</p>
-        <p class="content-description">${element.description}</p>
-        </div>
-        <div class="card-buttons">
-        <button>Edit</button>
-        <button>Done</button>
-        </div>
-        </div>`;
+      // data.map((element) => {
+      //   const todoHTML = `
+      //   <div class="card" data-id="${element._id}">
+      //   <div class="content">
+      //   <p class="content-tittle">${element.name}</p>
+      //   <p class="content-description">${element.description}</p>
+      //   </div>
+      //   <div class="card-buttons">
+      //   <button>Edit</button>
+      //   <button>Done</button>
+      //   </div>
+      //   </div>`;
 
-        todoDiv.insertAdjacentHTML("afterend", todoHTML);
-      });
+      //   todoDiv.insertAdjacentHTML("afterend", todoHTML);
+      // });
     })
     .catch((err) => {
       if (err) {
