@@ -15,7 +15,7 @@ async function fetchData() {
     .then((data) => {
       console.log(data);
 
-      data.map((element) => {
+      data[0].map((element) => {
         const todoHTML = `
         <div class="card" data-id="${element._id}">
         <div class="content">
