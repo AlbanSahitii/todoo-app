@@ -98,6 +98,7 @@ parentElement.addEventListener("click", (event) => {
       console.log(
         `Done button clicked for card with description: ${description}`
       );
+      completeTodo(dataId, name, description);
     }
   }
 });
@@ -113,13 +114,13 @@ async function deleteTodo(todoId) {
   }).then(() => location.reload());
 }
 
-async function completeTodo(todoId) {
+async function completeTodo(todo_id, name, description) {
   await fetch("/.netlify/functions/completeTodo", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ _id, todoId }),
+    body: JSON.stringify({ _id, todo_id, name, description }),
   }).then(() => location.reload());
 }
