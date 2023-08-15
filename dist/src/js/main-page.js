@@ -60,7 +60,7 @@ parentElement.addEventListener("click", (event) => {
 
 async function deleteTodo(todoId) {
   await fetch("/.netlify/functions/deleteTodo", {
-    method: "DELETE",
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
