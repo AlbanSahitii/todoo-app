@@ -46,9 +46,9 @@ exports.handler = async (event, context) => {
     };
   }
   const body = JSON.parse(event.body);
-
-  const userId = body._id;
-  const todoItemId = body.todoId;
+  const { userId, todoItemId } = body;
+  console.log(`todoitem ${todoItemId}`);
+  console.log(`userid ${userId}`);
 
   const user = await Users.findOne({ _id: userId });
 
