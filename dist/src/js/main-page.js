@@ -92,9 +92,9 @@ parentElement.addEventListener("click", (event) => {
       deleteTodo(dataId);
     } else if (event.target.textContent === "Done") {
       console.log(`Done button clicked for card with data-id: ${dataId}`);
-      console.log(`Done button clicked for card with name: ${name}`);
+      console.log(`Done button clicked for card with name: ${name.value}`);
       console.log(
-        `Done button clicked for card with description: ${description}`
+        `Done button clicked for card with description: ${description.value}`
       );
     }
   }
