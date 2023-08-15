@@ -25,7 +25,6 @@ async function fetchData() {
         <p class="content-description">${element.description}</p>
         </div>
         <div class="card-buttons">
-        <button>Edit</button>
         <button>Done</button>
         </div>
         </div>`;
@@ -49,9 +48,7 @@ parentElement.addEventListener("click", (event) => {
 
     const dataId = cardElement.getAttribute("data-id");
 
-    if (event.target.textContent === "Edit") {
-      console.log(`Edit button clicked for card with data-id: ${dataId}`);
-    } else if (event.target.textContent === "Done") {
+    if (event.target.textContent === "Done") {
       console.log(`Done button clicked for card with data-id: ${dataId}`);
     }
   }
