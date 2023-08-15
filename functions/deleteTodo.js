@@ -53,13 +53,9 @@ exports.handler = async (event, context) => {
   console.log(`todoitem ${todoItemId}`);
   console.log(`userid ${userId}`);
 
-  const user = await Users.findOne({ _id: userId });
-
-  user.todo = user.todo.filter((item) => item._id !== todoItemId);
-
   const result = await Users.updateOne(
     { _id: userId },
-    { $set: { todo: user.todo } }
+    { $pull: { todo: { _id: todoItemId } } }
   );
 
   if (!result) {
@@ -73,7 +69,7 @@ exports.handler = async (event, context) => {
     statusCode: 200,
     header: header,
     body: JSON.stringify({
-      message: `Deleted ${todoItemId} Succesfully ${result} `,
+      message: `Deleted ${todoItemId} Succesfully ${{ result }} `,
     }),
   };
 };
