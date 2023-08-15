@@ -84,8 +84,8 @@ parentElement.addEventListener("click", (event) => {
     const cardElement = event.target.closest(".card");
     const dataId = cardElement.getAttribute("data-id");
 
-    const name = docuement.getElementById("content-tittle").value;
-    const description = docuement.getElementById("content-description").value;
+    const name = document.getElementById("content-tittle").value;
+    const description = document.getElementById("content-description").value;
 
     if (event.target.textContent === "Delete") {
       console.log(`Delete button clicked for card with data-id: ${dataId}`);
