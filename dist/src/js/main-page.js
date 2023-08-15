@@ -51,7 +51,7 @@ parentElement.addEventListener("click", (event) => {
 
     if (event.target.textContent === "Delete") {
       console.log(`Delete button clicked for card with data-id: ${dataId}`);
-      deleteTodo(_id, dataId);
+      deleteTodo(dataId);
     } else if (event.target.textContent === "Done") {
       console.log(`Done button clicked for card with data-id: ${dataId}`);
     }
