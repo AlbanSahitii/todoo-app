@@ -84,17 +84,19 @@ parentElement.addEventListener("click", (event) => {
     const cardElement = event.target.closest(".card");
     const dataId = cardElement.getAttribute("data-id");
 
-    const name = document.querySelector(".content-tittle");
-    const description = document.querySelector(".content-description");
+    const name = document.querySelector(".content-tittle").textContent;
+    const description = document.querySelector(
+      ".content-description"
+    ).textContent;
 
     if (event.target.textContent === "Delete") {
       console.log(`Delete button clicked for card with data-id: ${dataId}`);
       deleteTodo(dataId);
     } else if (event.target.textContent === "Done") {
       console.log(`Done button clicked for card with data-id: ${dataId}`);
-      console.log(`Done button clicked for card with name: ${name.value}`);
+      console.log(`Done button clicked for card with name: ${name}`);
       console.log(
-        `Done button clicked for card with description: ${description.value}`
+        `Done button clicked for card with description: ${description}`
       );
     }
   }
