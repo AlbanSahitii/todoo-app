@@ -1,8 +1,9 @@
 const token = localStorage.getItem("jwt");
 const _id = localStorage.getItem("id");
 const todoDiv = document.getElementById("todo");
+const completedDiv = document.getElementById("completed");
 
-async function fetchData() {
+async function fetchTodo() {
   await fetch("/.netlify/functions/getTodos", {
     method: "POST",
     headers: {
@@ -39,14 +40,46 @@ async function fetchData() {
       }
     });
 }
-fetchData();
+fetchTodo();
+async function getCompleted() {
+  await fetch("/.netlify/functions/getCompleted", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ _id }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+
+      data.map((element) => {
+        console.log(element);
+
+        const todoHTML = `
+      <div class="card" data-id="${element._id}">
+        <div class="content">
+          <p class="content-tittle">${element.name}</p>
+          <p class="content-description">${element.description}</p>
+        </div>
+      </div>`;
+
+        completedDiv.insertAdjacentHTML("afterbegin", todoHTML);
+      });
+    })
+    .catch((err) => {
+      if (err) {
+        throw new Error("Request failed:", err);
+      }
+    });
+}
 
 const parentElement = document.querySelector(".main-page");
 
 parentElement.addEventListener("click", (event) => {
   if (event.target.tagName === "BUTTON" && event.target.closest(".card")) {
     const cardElement = event.target.closest(".card");
-
     const dataId = cardElement.getAttribute("data-id");
 
     if (event.target.textContent === "Delete") {
@@ -66,5 +99,5 @@ async function deleteTodo(todoId) {
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ _id, todoId }),
-  });
+  }).then(() => location.reload());
 }
