@@ -46,7 +46,10 @@ exports.handler = async (event, context) => {
     };
   }
   const body = JSON.parse(event.body);
-  const { userId, todoItemId } = body;
+
+  const userId = body._id;
+  const todoItemId = body.todoId;
+
   console.log(`todoitem ${todoItemId}`);
   console.log(`userid ${userId}`);
 
