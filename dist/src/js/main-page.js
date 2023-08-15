@@ -58,13 +58,13 @@ parentElement.addEventListener("click", (event) => {
   }
 });
 
-async function deleteTodo(id, todoID) {
+async function deleteTodo(todoId) {
   await fetch("/.netlify/functions/deleteTodo", {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ id, todoID }),
+    body: JSON.stringify({ _id, todoId }),
   });
 }
