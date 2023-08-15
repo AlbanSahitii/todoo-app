@@ -50,16 +50,14 @@ exports.handler = async (event, context) => {
   const userId = body._id;
   const todoItemId = body.todoId;
 
+  const user = await Users.findOne({ _id: userId });
+
+  user.todo = user.todo.filter((item) => item._id !== todoItemId);
+
   const result = await Users.updateOne(
     { _id: userId },
-    { $pull: { todo: { _id: todoItemId } } }
-  ).catch((err) => {
-    return {
-      statusCode: 404,
-      header: header,
-      body: JSON.stringify({ message: "Error while deleting todo item" }),
-    };
-  });
+    { $set: { todo: user.todo } }
+  );
 
   if (!result) {
     return {
