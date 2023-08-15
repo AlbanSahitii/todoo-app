@@ -53,7 +53,13 @@ exports.handler = async (event, context) => {
   const result = await Users.updateOne(
     { _id: userId },
     { $pull: { todo: { _id: todoItemId } } }
-  );
+  ).catch((err) => {
+    return {
+      statusCode: 404,
+      header: header,
+      body: JSON.stringify({ message: "Error while deleting todo item" }),
+    };
+  });
 
   if (!result) {
     return {
@@ -65,6 +71,8 @@ exports.handler = async (event, context) => {
   return {
     statusCode: 200,
     header: header,
-    body: JSON.stringify({ message: `Deleted ${todoItemId} Succesfully` }),
+    body: JSON.stringify({
+      message: `Deleted ${todoItemId} Succesfully ${result} `,
+    }),
   };
 };
