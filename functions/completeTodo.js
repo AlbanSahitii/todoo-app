@@ -45,5 +45,82 @@ exports.handler = async (event, context) => {
       body: JSON.stringify({ message: "Unauthorized" }),
     };
   }
+
   const body = JSON.parse(event.body);
+  const { _id, todo_id, name, description } = body;
+
+  if (!_id) {
+    return {
+      statusCode: 422,
+      header: header,
+      body: JSON.stringify({ message: "user id not found" }),
+    };
+  }
+  if (!todo_id) {
+    return {
+      statusCode: 422,
+      header: header,
+      body: JSON.stringify({ message: "todo id not found" }),
+    };
+  }
+  if (!name) {
+    return {
+      statusCode: 422,
+      header: header,
+      body: JSON.stringify({ message: "todo name not found" }),
+    };
+  }
+  if (!description) {
+    return {
+      statusCode: 422,
+      header: header,
+      body: JSON.stringify({ message: "description not found" }),
+    };
+  }
+
+  const user = await Users.findOne({ _id: _id });
+
+  const todo = await Users.findOne(
+    { _id: _id },
+    { todo: { $elemMatch: { _id: todo_id } } }
+  ).catch((error) => {
+    return {
+      statusCode: 422,
+      header: header,
+      body: JSON.stringify(error),
+    };
+  });
+
+  const todoPush = {
+    name: name,
+    description: description,
+  };
+
+  user.completed.push(todoPush);
+
+  const deleteTodo = await Users.updateOne(
+    { _id: _id },
+    { $pull: { todo: { _id: todo_id } } }
+  ).catch((error) => {
+    return {
+      statusCode: 422,
+      header: header,
+      body: JSON.stringify(error),
+    };
+  });
+
+  user
+    .save()
+    .then((savedUser) => {
+      console.log("New todoItem added to user:", savedUser);
+    })
+    .catch((error) => {
+      console.error("Error while saving user:", error);
+    });
+
+  return {
+    statusCode: 200,
+    header: header,
+    body: JSON.stringify({ message: "Done!" }),
+  };
 };

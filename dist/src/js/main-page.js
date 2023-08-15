@@ -2,6 +2,7 @@ const token = localStorage.getItem("jwt");
 const _id = localStorage.getItem("id");
 const todoDiv = document.getElementById("todo");
 const completedDiv = document.getElementById("completed");
+const completeTodoButton = document.getElementById("complete-todo");
 
 async function fetchTodo() {
   await fetch("/.netlify/functions/getTodos", {
@@ -27,7 +28,7 @@ async function fetchTodo() {
         </div>
         <div class="card-buttons">
         <button>Delete</button>
-        <button>Done</button>
+        <button id="complete-todo">Done</button>
         </div>
         </div>`;
 
@@ -82,18 +83,35 @@ parentElement.addEventListener("click", (event) => {
   if (event.target.tagName === "BUTTON" && event.target.closest(".card")) {
     const cardElement = event.target.closest(".card");
     const dataId = cardElement.getAttribute("data-id");
+    const name = cardElement.getAttribute("content-tittle");
+    const description = cardElement.getAttribute("content-description");
 
     if (event.target.textContent === "Delete") {
       console.log(`Delete button clicked for card with data-id: ${dataId}`);
       deleteTodo(dataId);
     } else if (event.target.textContent === "Done") {
       console.log(`Done button clicked for card with data-id: ${dataId}`);
+      console.log(`Done button clicked for card with name: ${name}`);
+      console.log(
+        `Done button clicked for card with description: ${description}`
+      );
     }
   }
 });
 
 async function deleteTodo(todoId) {
   await fetch("/.netlify/functions/deleteTodo", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ _id, todoId }),
+  }).then(() => location.reload());
+}
+
+async function completeTodo(todoId) {
+  await fetch("/.netlify/functions/completeTodo", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
