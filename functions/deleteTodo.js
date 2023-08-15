@@ -62,7 +62,6 @@ exports.handler = async (event, context) => {
       body: JSON.stringify({ message: "Error while deleting todo item" }),
     };
   }
-  res.status(200).send(result);
   return {
     statusCode: 200,
     header: header,
