@@ -41,7 +41,7 @@ async function fetchTodo() {
     });
 }
 fetchTodo();
-async function getCompleted() {
+async function fetchCompleted() {
   await fetch("/.netlify/functions/getCompleted", {
     method: "POST",
     headers: {
@@ -74,6 +74,7 @@ async function getCompleted() {
       }
     });
 }
+fetchCompleted();
 
 const parentElement = document.querySelector(".main-page");
 
